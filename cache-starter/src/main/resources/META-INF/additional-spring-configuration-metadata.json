@@ -1,0 +1,25 @@
+{
+  "properties": [
+    {
+      "name": "cache.status",
+      "type": "java.lang.String",
+      "defaultValue": "enabled"
+    },
+    {
+      "name": "cache.algorithm-type",
+      "type": "java.lang.String",
+      "defaultValue": "LFU",
+      "description": "LFU | LRU types."
+    },
+    {
+      "name": "cache.capacity",
+      "type": "java.lang.Integer",
+      "defaultValue": 20
+    },
+    {
+      "name": "cache.key-field-name",
+      "type": "java.lang.String",
+      "defaultValue": "id"
+    }
+  ]
+}

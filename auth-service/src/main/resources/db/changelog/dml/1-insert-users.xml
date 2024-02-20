@@ -1,0 +1,44 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="Kihtenko Olga" id="insert_1_users">
+        <insert tableName="users">
+            <column name="email" value="kiok@mail.ru"/>
+            <column name="role" value="ADMIN"/>
+            <column name="username" value="kiok"/>
+            <column name="password" value="12345Qw_"/>
+        </insert>
+        <insert tableName="users">
+            <column name="email" value="alya228@gmail.com"/>
+            <column name="role" value="SUBSCRIBER"/>
+            <column name="username" value="alya228"/>
+            <column name="password" value="12345Qw_"/>
+        </insert>
+        <insert tableName="users">
+            <column name="email" value="iva12983@gmail.com"/>
+            <column name="role" value="SUBSCRIBER"/>
+            <column name="username" value="iva12983"/>
+            <column name="password" value="12345Qw_"/>
+        </insert>
+        <insert tableName="users">
+            <column name="email" value="ivan121@gmail.com"/>
+            <column name="role" value="SUBSCRIBER"/>
+            <column name="username" value="ivan121"/>
+            <column name="password" value="12345Qw_"/>
+        </insert>
+        <insert tableName="users">
+            <column name="email" value="HoRoShiDen@gmail.com"/>
+            <column name="role" value="SUBSCRIBER"/>
+            <column name="username" value="HoRoShiDen"/>
+            <column name="password" value="12345Qw_"/>
+        </insert>
+        <insert tableName="users">
+            <column name="email" value="aifhijaio12@gmail.com"/>
+            <column name="role" value="SUBSCRIBER"/>
+            <column name="username" value="aifhijaio_12"/>
+            <column name="password" value="12345Qw_"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

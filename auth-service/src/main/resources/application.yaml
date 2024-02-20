@@ -1,0 +1,7 @@
+active: dev
+
+spring:
+  application:
+    name: auth-service
+  profiles:
+    active: ${active}

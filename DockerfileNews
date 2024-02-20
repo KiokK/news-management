@@ -1,0 +1,5 @@
+FROM openjdk:17
+
+ADD news-service/build/libs/news-service-1.0.jar /app/news-service-1.0.jar
+
+ENTRYPOINT ["java", "-jar", "app/news-service-1.0.jar"]
