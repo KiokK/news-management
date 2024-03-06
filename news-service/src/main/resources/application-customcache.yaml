@@ -1,0 +1,4 @@
+cache:
+  algorithm-type: LFU
+  capacity: 15
+  key-field-name: id

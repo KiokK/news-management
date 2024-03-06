@@ -1,0 +1,7 @@
+active: dev
+
+spring:
+  application:
+    name: news-service
+  profiles:
+    active: ${active},redis #customcache

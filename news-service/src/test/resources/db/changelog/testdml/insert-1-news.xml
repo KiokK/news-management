@@ -1,0 +1,49 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="Kihtenko Olga" id="insert_1_news">
+        <insert tableName="news">
+            <column name="title" value="Today I made my first money as a Programmer"/>
+            <column name="text" value="I sold my laptop."/>
+        </insert>
+        <insert tableName="news">
+            <column name="title" value="Only programmers will get this one:"/>
+            <column name="text" value="Why did the functions stop calling each other?
+                                       Ans: Because they had too many arguments."/>
+        </insert>
+        <insert tableName="news">
+            <column name="title" value="As a programmer, I would make a UDP joke"/>
+            <column name="text" value="But you might not get it."/>
+        </insert>
+        <insert tableName="news">
+            <column name="title" value="A programmer walks into a bar,"/>
+            <column name="text" value="A programmer walks into a bar, holds up two fingers, and says ''I’ll have three beers please.''"/>
+        </insert>
+        <insert tableName="news">
+            <column name="title" value="What does a programmer wear?"/>
+            <column name="text" value="Whatever is in the dress code."/>
+        </insert>
+        <insert tableName="news">
+            <column name="title" value="If you're a programmer, you would know:"/>
+            <column name="text" value="// the real joke is always in the comments"/>
+        </insert>
+        <insert tableName="news">
+            <column name="title" value="What code does a depressed programmer write?"/>
+            <column name="text" value="'Goodbye world!'"/>
+        </insert>
+        <insert tableName="news">
+            <column name="title" value="How do you tell the difference between an English major, a Math major, and a programmer?"/>
+            <column name="text" value="Ask them what '!' is"/>
+        </insert>
+        <insert tableName="news">
+            <column name="title" value="A programmer was arrested for writing unreadable code"/>
+            <column name="text" value="He refused to comment"/>
+        </insert>
+        <insert tableName="news">
+            <column name="title" value="What did 0 say to 1?"/>
+            <column name="text" value="You're a bit too much"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
