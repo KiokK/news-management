@@ -58,7 +58,7 @@ Delete them to disable prod profile and delete:
 ### Build and run:
 
 ! For building db containers (db-news-comments and db-users) should be run.
-In docker-compose run two containers: 
+In docker-compose up two containers: 
 
 ```yaml
   db-news-comments:
