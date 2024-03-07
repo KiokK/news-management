@@ -170,6 +170,6 @@ public interface UserControllerOpenApi {
                             )
                     )
             })
-    ResponseEntity<UserPageResponseDto> getAll(Pageable pageable);
+    ResponseEntity<UserPageResponseDto> getAllUsers(Pageable pageable);
 
 }

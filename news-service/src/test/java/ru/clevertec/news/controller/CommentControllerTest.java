@@ -104,13 +104,8 @@ class CommentControllerTest {
             //given
             CommentRequestDto createDto = new CommentRequestDto("", null, 2L);
             String notValidJsonRequest = toJsonString(createDto);
-            CommentResponseDto expectedDto = getCommentResponseDto();
 
-            //when
-            when(commentService.create(any()))
-                    .thenReturn(expectedDto);
-
-            //then
+            //when//then
             mockMvc.perform(post(REQUEST_MAPPING)
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(notValidJsonRequest))
@@ -120,6 +115,7 @@ class CommentControllerTest {
                             jsonPath("$.errorMessage").isNotEmpty(),
                             jsonPath("$.errorCode").isNotEmpty()
                     );
+            verify(commentService, times(0)).create(any());
         }
 
         @Test

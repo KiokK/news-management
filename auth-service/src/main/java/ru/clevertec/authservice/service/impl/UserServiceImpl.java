@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.clevertec.authservice.dto.request.UserRequestDto;
 import ru.clevertec.authservice.dto.response.UserPageResponseDto;
 import ru.clevertec.authservice.dto.response.UserResponseDto;
+import ru.clevertec.authservice.exception.UserEntityException;
 import ru.clevertec.authservice.mapper.UserMapper;
 import ru.clevertec.authservice.model.User;
 import ru.clevertec.authservice.reposiroty.UserRepository;
@@ -28,12 +29,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserResponseDto create(UserRequestDto dto) {
+    public UserResponseDto create(UserRequestDto dto) throws UserEntityException {
         return Optional.of(dto)
                 .map(userMapper::toUser)
                 .map(userRepository::save)
                 .map(userMapper::toUserResponseDto)
-                .orElseThrow();
+                .orElseThrow(() -> new UserEntityException());
     }
 
     @Override

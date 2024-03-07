@@ -4,6 +4,7 @@ import org.springframework.data.domain.Pageable;
 import ru.clevertec.authservice.dto.request.UserRequestDto;
 import ru.clevertec.authservice.dto.response.UserPageResponseDto;
 import ru.clevertec.authservice.dto.response.UserResponseDto;
+import ru.clevertec.authservice.exception.UserEntityException;
 import ru.clevertec.authservice.model.User;
 import ru.clevertec.exceptionhandlerstarter.exception.EntityNotFoundException;
 
@@ -12,8 +13,9 @@ public interface UserService {
     /**
      * @param dto объект, содержащий данные для создания пользователя
      * @return созданный объект с информацией о пользователе {@link User}
+     * @throws UserEntityException при конфликте создания объекта
      */
-    UserResponseDto create(UserRequestDto dto);
+    UserResponseDto create(UserRequestDto dto) throws UserEntityException;
 
     /**
      * @param username имя пользователя для поиска объекта пользователя
