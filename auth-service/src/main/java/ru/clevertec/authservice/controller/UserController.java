@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.clevertec.authservice.controller.openapi.UserControllerOpenApi;
 import ru.clevertec.authservice.dto.request.UserRequestDto;
 import ru.clevertec.authservice.dto.response.UserPageResponseDto;
 import ru.clevertec.authservice.dto.response.UserResponseDto;
@@ -21,21 +22,24 @@ import ru.clevertec.logginstarter.annotation.CustomMethodLog;
 @CustomMethodLog
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/users")
-public class UserController {
+public class UserController implements UserControllerOpenApi {
 
     private final UserService userService;
 
+    @Override
     @PostMapping
     public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody UserRequestDto userRequestDto) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(userService.create(userRequestDto));
     }
 
+    @Override
     @GetMapping("/{username}")
     public ResponseEntity<UserResponseDto> getUserByUsername(@PathVariable String username) {
         return ResponseEntity.ok(userService.findByUsername(username));
     }
 
+    @Override
     @GetMapping
     public ResponseEntity<UserPageResponseDto> getAll(Pageable pageable) {
         return ResponseEntity.ok(userService.findAll(pageable));

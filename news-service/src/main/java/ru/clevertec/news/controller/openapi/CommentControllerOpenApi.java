@@ -32,12 +32,12 @@ public interface CommentControllerOpenApi {
                             mediaType = "application/json",
                             schema = @Schema(implementation = CommentRequestDto.class),
                             examples = @ExampleObject("""
-                                            {
-                                                 "text": "Good joke",
-                                                 "username": "kiok",
-                                                 "newsId": 1
-                                            }
-                                            """)
+                                    {
+                                         "text": "Good joke",
+                                         "username": "kiok",
+                                         "newsId": 1
+                                    }
+                                    """)
                     )
             ),
             responses = {
@@ -87,13 +87,130 @@ public interface CommentControllerOpenApi {
             })
     ResponseEntity<CommentResponseDto> createComment(@Valid @RequestBody CommentRequestDto commentRequestDto);
 
-
+    @Operation(
+            method = "GET",
+            description = "Get comment by id",
+            parameters = {
+                    @Parameter(name = "id", description = "Comment id", example = "1")
+            },
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = CommentResponseDto.class),
+                                    examples = @ExampleObject("""
+                                            {
+                                              "id": 1,
+                                              "text": "I sold my laptop... and bought ipad!",
+                                              "username": "alya228",
+                                              "newsId": 1,
+                                              "createdAt": "2024-03-07T02:52:07",
+                                              "modifiedAt": "2024-03-07T02:52:07"
+                                            }
+                                            """)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = ErrorResponseDto.class),
+                                    examples = @ExampleObject("""
+                                            {
+                                              "errorMessage": "Entity with id='1324' not found",
+                                              "errorCode": 404400
+                                            }
+                                            """)
+                            )
+                    )
+            })
     ResponseEntity<CommentResponseDto> getCommentById(@PathVariable Long id);
 
+    @Operation(
+            method = "GET",
+            description = "Get comment with author by commentId",
+            parameters = {
+                    @Parameter(name = "id", description = "Comment id", example = "1")
+            },
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = CommentAuthorResponseDto.class),
+                                    examples = @ExampleObject("""
+                                            {
+                                              "commentId": 1,
+                                              "userId": 2,
+                                              "text": "I sold my laptop... and bought ipad!",
+                                              "username": "alya228",
+                                              "email": "alya228@gmail.com",
+                                              "newsId": 1,
+                                              "createdAt": "2024-03-07T02:52:07",
+                                              "modifiedAt": "2024-03-07T02:52:07"
+                                            }
+                                            """)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = ErrorResponseDto.class),
+                                    examples = @ExampleObject("""
+                                            {
+                                              "errorMessage": "Entity with id='1324' not found",
+                                              "errorCode": 404400
+                                            }
+                                            """)
+                            )
+                    )
+            })
     ResponseEntity<CommentAuthorResponseDto> getCommentAuthorByCommentId(@PathVariable Long id);
 
+    @Operation(
+            method = "GET",
+            description = "Get all comments by pageable info",
+            parameters = {
+                    @Parameter(name = "pageSize", description = "Page size", example = "2"),
+                    @Parameter(name = "pageNumber", description = "Number page", example = "0"),
+                    @Parameter(name = "sort", description = "Sort by field", example = "createdAt,asc")
+            },
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = CommentsPageResponseDto.class),
+                                    examples = @ExampleObject("""
+                                            {
+                                              "comments": [
+                                                  {
+                                                    "id": 1,
+                                                    "text": "I sold my laptop... and bought ipad!",
+                                                    "username": "alya228",
+                                                    "newsId": 1,
+                                                    "createdAt": "2024-03-07T02:52:07",
+                                                    "modifiedAt": "2024-03-07T02:52:07"
+                                                  },
+                                                  {
+                                                    "id": 2,
+                                                    "text": "Ba-ha-ha",
+                                                    "username": "alya228",
+                                                    "newsId": 1,
+                                                    "createdAt": "2024-03-07T02:52:07",
+                                                    "modifiedAt": "2024-03-07T02:52:07"
+                                                  }
+                                                ],
+                                                "pageSize": 2,
+                                                "pageNumber": 0
+                                            }
+                                            """)
+                            )
+                    )
+            })
     ResponseEntity<CommentsPageResponseDto> getAllComments(Pageable pageable);
-
 
     @Operation(
             method = "GET",
@@ -158,7 +275,6 @@ public interface CommentControllerOpenApi {
             })
     ResponseEntity<CommentsPageResponseDto> getAllCommentsByFilter(@Valid Filter filter, Pageable pageable);
 
-
     @Operation(
             method = "PUT",
             description = "Update Comment",
@@ -168,10 +284,10 @@ public interface CommentControllerOpenApi {
                             mediaType = "application/json",
                             schema = @Schema(implementation = CommentRequestDto.class),
                             examples = @ExampleObject("""
-                                            {
-                                                 "text": "New comment info."
-                                            }
-                                            """)
+                                    {
+                                         "text": "New comment info."
+                                    }
+                                    """)
                     )
             ),
             responses = {

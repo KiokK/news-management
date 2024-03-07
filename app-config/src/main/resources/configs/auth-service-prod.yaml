@@ -30,3 +30,6 @@ server:
 
 logging:
   status: disabled
+
+exception-handler:
+  status: enabled
