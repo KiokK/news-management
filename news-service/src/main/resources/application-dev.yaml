@@ -2,6 +2,14 @@ spring:
   cloud:
     config:
       enabled: false
+  security:
+    user:
+      name: user
+      password: password
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:9000/oauth2/jwks
   datasource:
     url: jdbc:postgresql://localhost:5432/news
     username: postgres
@@ -35,5 +43,5 @@ logging:
   level:
     root: INFO
     org.springframework.web: INFO
-    org.springframework.security: INFO
+    org.springframework.security: trace
     org.springframework.security.oauth2: INFO

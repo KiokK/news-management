@@ -14,6 +14,8 @@
 - postgresql
 - liquibase
 - docker
+- spring security
+- oauth2
 
 ## Structure
  - [bd_bases](bd_bases)
@@ -54,13 +56,34 @@ Delete them to disable prod profile and delete:
 ```
 
 ### Build and run:
-! For building db containers (db-news-comments and db-users) should be run
+
+! For building db containers (db-news-comments and db-users) should be run.
+In docker-compose run two containers: 
+
+```yaml
+  db-news-comments:
+    container_name: db_news_comments
+    image: postgres:alpine
+    ...
+    ports:
+      - "5432:5432"
+
+  db-users:
+    container_name: db_users
+    image: postgres:alpine
+    ...
+    ports:
+      - "5433:5432"
+```
+
+build and up:
 ```
 ./gradlew build
 
 docker-compose up -d
 ```
-### Rebuild:
+
+### Rebuild (if necessary):
 ```
 ./gradlew build
 ```
@@ -71,6 +94,27 @@ docker-compose pull
 docker-compose build --no-cache 
 docker-compose up -d --force-recreate
 ```
+
+### * Get token
+
+Postman:
+
+localhost:9000/oauth2/token
+
+![img.png](img.png)
+Body params: grant_type: client_credentials
+![img_1.png](img_1.png)
+
+Response example:
+```yaml
+{
+    "access_token": "eyJraWQiOiI2NGE0MjQ1Mi1hYmQwLTQ2ZmUtOTdjOC0yYjhmMGJkMmJhYmQiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJjbGllbnQiLCJhdWQiOiJjbGllbnQiLCJuYmYiOjE3MDk4MjM4MzEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTAwMCIsImV4cCI6MTcwOTgyNDEzMSwiaWF0IjoxNzA5ODIzODMxLCJqdGkiOiIyYzc2YTE4Zi0xZTE3LTRlYmEtODQwNi00YzM1Nzg3NjEyOWYifQ.BmDx3-tnAKxh7BUBYwUZxKO95atwg7yCl3iHDzWgdeg0dssiLq9tM-VC-2_wCYbYPW6Ds4TptQjoCipcAyQ-4rPiMePypQbKu5zIGsu57SJcmP1dqpa3IbmO0-YI1VevRPoDZOqGqcOfXRmhoc_CJi9JnGdPYQJCAuJskGTO27yhz3sFve2AvMBz6RvQKs6Rn7WMW5i3txvA1gTqBY4X5HZ0jTKPnwugShi2ZYABwVCVmFDms8eY3U8bkyvqbt9ekG6pmweIpglcs2E8grQsouONkfrSBJPbhrZZh--Z5fR1m5r1ET5EFHOHOWAtIZ919qWAvoxMIzUBO04FyrM6Nw",
+    "token_type": "Bearer",
+    "expires_in": 300
+}
+```
+
+* copy `access_token` for swagger auth (~5 min useful/ than regenerate)
 
 ## Endpoints OpenApi:
 
