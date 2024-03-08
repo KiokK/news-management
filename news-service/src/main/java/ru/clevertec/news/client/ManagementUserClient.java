@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import ru.clevertec.news.dto.response.UserManagementDto;
 
 @Component
@@ -12,6 +13,7 @@ import ru.clevertec.news.dto.response.UserManagementDto;
 public interface ManagementUserClient {
 
     @GetMapping("/{username}")
-    ResponseEntity<UserManagementDto> getUserByUsername(@PathVariable String username);
+    ResponseEntity<UserManagementDto> getUserByUsername(@PathVariable String username,
+                                                        @RequestHeader(value = "Authorization") String authorizationHeader);
 
 }

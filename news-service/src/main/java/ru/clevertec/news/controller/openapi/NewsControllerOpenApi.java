@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,7 @@ import ru.clevertec.news.dto.response.NewsWithCommentResponseDto;
 import ru.clevertec.news.dto.response.NewsWithPageCommentsResponseDto;
 
 @Tag(name = "News")
+@SecurityRequirement(name = "jwt")
 public interface NewsControllerOpenApi {
 
     @Operation(

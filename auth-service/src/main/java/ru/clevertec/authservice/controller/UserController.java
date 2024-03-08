@@ -42,7 +42,6 @@ public class UserController implements UserControllerOpenApi {
     @Override
     @GetMapping
     public ResponseEntity<UserPageResponseDto> getAllUsers(Pageable pageable) {
-
         return ResponseEntity.ok(userService.findAll(pageable));
     }
 }

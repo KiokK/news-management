@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.clevertec.cachestarter.cache.proxy.DeleteFromCache;
@@ -33,6 +35,7 @@ import ru.clevertec.news.service.CommentService;
 import java.util.List;
 import java.util.Optional;
 
+import static ru.clevertec.news.config.SecurityConfig.AUTHORIZATION_TYPE;
 import static ru.clevertec.news.validation.SearchFilterValidation.validate;
 
 @Service
@@ -51,7 +54,9 @@ public class CommentServiceImpl implements CommentService {
     @PutToCache
     @Transactional
     public CommentResponseDto create(CommentRequestDto dto) throws EntityNotFoundException {
-        Optional.ofNullable(userClient.getUserByUsername(dto.username()).getBody())
+        JwtAuthenticationToken authentication = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+
+        Optional.ofNullable(userClient.getUserByUsername(dto.username(), AUTHORIZATION_TYPE + authentication.getToken().getTokenValue()).getBody())
                 .orElseThrow(() -> new EntityNotFoundException("username", dto.username()));
 
         return Optional.of(dto)
@@ -72,9 +77,11 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentAuthorResponseDto findCommentWithAuthorById(Long id) throws EntityNotFoundException {
+        JwtAuthenticationToken authentication = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+
         Comment comment = commentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
         UserManagementDto userManagementDto = Optional.ofNullable(
-                userClient.getUserByUsername(comment.getUsername()).getBody()
+                userClient.getUserByUsername(comment.getUsername(), AUTHORIZATION_TYPE + authentication.getToken().getTokenValue()).getBody()
         ).orElseThrow(() -> new EntityNotFoundException("username", comment.getUsername()));
 
         return commentMapper.toCommentAuthorResponseDto(comment, userManagementDto);
