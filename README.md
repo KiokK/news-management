@@ -35,41 +35,42 @@
    - [cache-starter](cache-starter)
  - [docker-compose.yaml](docker-compose.yaml)
 
+oauth2 with jwt tokens:
+
+https://github.com/KiokK/news-management/pull/2/files
+
+#### Redis / custom cache
+[news-service/../application.yaml](news-service/src/main/resources/application.yaml)
+```yaml
+    active: redis #or customcache
+```
+
 ## Run
 
-### Docker-compose (*Settings):
+### Build and run 'dev' mode:
+Run with db scripts*
 
-Prod settings from app-config includes by: 
-```yaml
-environment:
-  CONFIGHOST: http://app-config:8888
-  SPRING_PROFILES_ACTIVE: dev,redis
-```
-Delete them to disable prod profile and delete:
-```yaml
-  app-config:
-    build:
-      dockerfile: DockerfileConfig
-  ...
-```
-
-### Build and run:
 ! For building db containers (db-news-comments and db-users) should be run
 ```
-./gradlew build
+./gradlew :exception-handler-starter:build
+./gradlew :cache-starter:build
+./gradlew :loggin-starter:build
 
 docker-compose up -d
+
+./gradlew :news-service:run
+./gradlew :auth-service:run
 ```
-### Rebuild:
+### Prod:
+db is empty*
+
+Delete comments from docker-compose, run
+
 ```
-./gradlew build
-```
-With cache cleaning:
-```
-docker-compose rm --all 
-docker-compose pull 
-docker-compose build --no-cache 
-docker-compose up -d --force-recreate
+./gradlew :exception-handler-starter:build
+./gradlew :cache-starter:build
+./gradlew :loggin-starter:build
+docker-compose up -d
 ```
 
 ## Endpoints OpenApi:
@@ -82,7 +83,7 @@ user service
 
 http://localhost:9000/swagger-ui/index.html#/
 
-### Get prod configs:
+### Get configs from claud (if app-config started):
 
 - http://localhost:8888/news-service/prod,redis
 - http://localhost:8888/news-service/prod
