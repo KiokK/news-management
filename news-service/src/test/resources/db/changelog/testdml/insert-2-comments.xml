@@ -1,0 +1,63 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="Kihtenko Olga" id="insert_2_comments">
+        <insert tableName="comments">
+            <column name="text" value="I sold my laptop... and bought ipad!"/>
+            <column name="username" value="alya228"/>
+            <column name="news_id" value="1"/>
+        </insert>
+        <insert tableName="comments">
+            <column name="text" value="Ba-ha-ha"/>
+            <column name="username" value="alya228"/>
+            <column name="news_id" value="1"/>
+        </insert>
+        <insert tableName="comments">
+            <column name="text" value="Ba-ha-ha"/>
+            <column name="username" value="iva12983"/>
+            <column name="news_id" value="1"/>
+        </insert>
+        <insert tableName="comments">
+            <column name="text" value="Good job)))"/>
+            <column name="username" value="ivan121"/>
+            <column name="news_id" value="1"/>
+        </insert>
+        <insert tableName="comments">
+            <column name="text" value="Funny"/>
+            <column name="username" value="alya228"/>
+            <column name="news_id" value="2"/>
+        </insert>
+        <insert tableName="comments">
+            <column name="text" value="Have a nice day"/>
+            <column name="username" value="alya228"/>
+            <column name="news_id" value="3"/>
+        </insert>
+        <insert tableName="comments">
+            <column name="text" value="He-he-he"/>
+            <column name="username" value="kiok"/>
+            <column name="news_id" value="4"/>
+        </insert>
+        <insert tableName="comments">
+            <column name="text" value="Not bad!)"/>
+            <column name="username" value="HoRoShiDen"/>
+            <column name="news_id" value="5"/>
+        </insert>
+        <insert tableName="comments">
+            <column name="text" value="Ba-ha-ha"/>
+            <column name="username" value="HoRoShiDen"/>
+            <column name="news_id" value="6"/>
+        </insert>
+        <insert tableName="comments">
+            <column name="text" value="Ba-ha-ha"/>
+            <column name="username" value="iva12983"/>
+            <column name="news_id" value="7"/>
+        </insert>
+        <insert tableName="comments">
+            <column name="text" value="It is very funny!!!"/>
+            <column name="username" value="aifhijaio_12"/>
+            <column name="news_id" value="8"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

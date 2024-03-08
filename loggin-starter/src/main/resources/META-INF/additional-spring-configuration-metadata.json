@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "name": "logging.status",
+      "type": "java.lang.String",
+      "defaultValue": "disabled",
+      "description": "Write: enabled - for logging methods."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+spring:
+  data:
+    redis:
+      timeout: 600ms
+      password:
+  cache:
+    type: redis
+    redis:
+      time-to-live: 300000
+      cache-null-values: false
+
+cache:
+  status: disabled

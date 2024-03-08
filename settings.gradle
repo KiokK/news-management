@@ -1,1 +1,8 @@
 rootProject.name = "news-management"
+
+include "app-config"
+include "cache-starter"
+include "loggin-starter"
+include "exception-handler-starter"
+include "news-service"
+include "auth-service"

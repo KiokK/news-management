@@ -1,0 +1,72 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'org.springframework.boot' version '3.2.1'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'io.freefair.lombok' version '8.4'
+}
+
+group 'ru.clevertec'
+version '1.0'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+publishing {
+    publications {
+        myApp(MavenPublication) {
+            groupId = "${group}"
+            artifactId = 'loging-starter'
+            version = "${version}"
+
+            from components.java
+
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+        }
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    implementation 'org.liquibase:liquibase-core'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework:spring-aop'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.named("build") {
+    finalizedBy('publishToMavenLocal')
+}
+
+tasks.named('compileJava') {
+    inputs.files(tasks.named('processResources'))
+}

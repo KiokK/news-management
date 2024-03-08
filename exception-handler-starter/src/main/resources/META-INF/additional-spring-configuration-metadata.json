@@ -1,0 +1,16 @@
+{
+  "properties": [
+    {
+      "name": "exception-handler.status",
+      "type": "java.lang.String",
+      "defaultValue": "enabled",
+      "description": "Write: disabled - for disabled exception handling."
+    },
+    {
+      "name": "exception-handler.validation",
+      "type": "java.lang.String",
+      "defaultValue": "enabled",
+      "description": "Check org.springframework.web.bind.MethodArgumentNotValidException. Write: disabled - for disabled exception handling."
+    }
+  ]
+}

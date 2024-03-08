@@ -1,0 +1,5 @@
+FROM openjdk:17
+
+ADD app-config/build/libs/app-config-1.0.0.jar /app/app-config-1.0.0.jar
+
+ENTRYPOINT ["java", "-jar", "app/app-config-1.0.0.jar"]

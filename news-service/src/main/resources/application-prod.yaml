@@ -1,0 +1,8 @@
+confighost: http://localhost:8888
+
+spring:
+  config:
+    import: "optional:configserver:${confighost}"
+    cloud:
+      config:
+        fail-fast: true

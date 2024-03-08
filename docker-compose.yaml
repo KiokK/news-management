@@ -1,0 +1,79 @@
+version: '3.5'
+services:
+
+  db-news-comments:
+    container_name: db_news_comments
+    image: postgres:alpine
+    restart: always
+    environment:
+      POSTGRES_DB: news
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5432:5432"
+
+  db-users:
+    container_name: db_users
+    image: postgres:alpine
+    restart: always
+    environment:
+      POSTGRES_DB: users
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5433:5432"
+
+#  app-config:
+#    build:
+#      dockerfile: DockerfileConfig
+#    container_name: app-config
+#    restart: always
+#    ports:
+#      - "8888:8888"
+
+  redis_cache:
+    container_name: redis_cache
+    image: "redis"
+    restart: always
+    ports:
+      - "6379:6379"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+
+#  news-service:
+#    build:
+#      dockerfile: DockerfileNews
+#    container_name: news-service
+#    restart: always
+#    environment:
+#      CONFIGHOST: http://app-config:8888
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://db_news_comments:5432/news
+#      SPRING_DATASOURCE_USERNAME: postgres
+#      SPRING_DATASOURCE_PASSWORD: 1234
+#      SPRING_REDIS_HOST: redis_cache
+#      SPRING_REDIS_PORT: 6379
+#      SPRING_PROFILES_ACTIVE: prod,redis
+#    ports:
+#      - "8082:8082"
+#    depends_on:
+#      - db-news-comments
+#      - redis_cache
+#      - app-config
+#
+#  auth-service:
+#    build:
+#      dockerfile: DockerfileAuth
+#    container_name: auth-service
+#    restart: always
+#    environment:
+#      CONFIGHOST: http://app-config:8888
+#      SPRING_DATASOURCE_USERNAME: postgres
+#      SPRING_DATASOURCE_PASSWORD: 1234
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://db_users:5432/users
+#      SPRING_PROFILES_ACTIVE: prod
+#    ports:
+#      - "9000:9000"
+#    depends_on:
+#      - db-users
+#      - app-config

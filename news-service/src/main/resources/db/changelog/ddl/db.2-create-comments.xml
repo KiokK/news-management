@@ -1,0 +1,35 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="Kihtenko Olga" id="comments_default">
+        <createTable tableName="comments">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" primaryKeyName="pk_comments"/>
+            </column>
+            <column name="text" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="news_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_comments_new"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createIndex indexName="idx_comments_id" tableName="comments" unique="true">
+            <column name="id"/>
+        </createIndex>
+        <addForeignKeyConstraint baseTableName="comments" baseColumnNames="news_id" constraintName="fk_comments_news"
+                                 referencedTableName="news"
+                                 referencedColumnNames="id"/>
+
+    </changeSet>
+</databaseChangeLog>
