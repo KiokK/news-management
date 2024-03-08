@@ -39,60 +39,32 @@
 
 ## Run
 
-### Docker-compose (*Settings):
+### Build and run 'dev' mode:
 
-Prod settings from app-config includes by: 
-```yaml
-environment:
-  CONFIGHOST: http://app-config:8888
-  SPRING_PROFILES_ACTIVE: dev,redis
+Run with db scripts*
+
+! For building db containers (db-news-comments and db-users) should be run
 ```
-Delete them to disable prod profile and delete:
-```yaml
-  app-config:
-    build:
-      dockerfile: DockerfileConfig
-  ...
-```
-
-### Build and run:
-
-! For building db containers (db-news-comments and db-users) should be run.
-In docker-compose up two containers: 
-
-```yaml
-  db-news-comments:
-    container_name: db_news_comments
-    image: postgres:alpine
-    ...
-    ports:
-      - "5432:5432"
-
-  db-users:
-    container_name: db_users
-    image: postgres:alpine
-    ...
-    ports:
-      - "5433:5432"
-```
-
-build and up:
-```
-./gradlew build
+./gradlew :exception-handler-starter:build
+./gradlew :cache-starter:build
+./gradlew :loggin-starter:build
 
 docker-compose up -d
-```
 
-### Rebuild (if necessary):
+./gradlew :news-service:run
+./gradlew :auth-service:run
 ```
-./gradlew build
+### Prod:
+
+db is empty*
+
+Delete comments from docker-compose, run
+
 ```
-With cache cleaning:
-```
-docker-compose rm --all 
-docker-compose pull 
-docker-compose build --no-cache 
-docker-compose up -d --force-recreate
+./gradlew :exception-handler-starter:build
+./gradlew :cache-starter:build
+./gradlew :loggin-starter:build
+docker-compose up -d
 ```
 
 ### * Get token
@@ -126,7 +98,7 @@ user service
 
 http://localhost:9000/swagger-ui/index.html#/
 
-### Get prod configs:
+### Get configs from claud (if app-config started):
 
 - http://localhost:8888/news-service/prod,redis
 - http://localhost:8888/news-service/prod
